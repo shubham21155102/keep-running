@@ -38,9 +38,10 @@ env/
 *~
 .DS_Store
 
-# Output files
+# Output files (only ignore in root, allow in results/)
 predicate_extraction_results_*.json
 *.json.bak
+!results/
 logs/
 
 # Models cache

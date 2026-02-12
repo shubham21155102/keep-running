@@ -23,6 +23,7 @@ import pdfplumber
 import json
 import sys
 import argparse
+import subprocess
 from io import BytesIO
 from typing import List, Dict, Any, Optional
 from datetime import datetime
@@ -401,17 +402,117 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None) -> List[str]:
 
 
 def save_results(results: List[Dict], filename: str = None) -> str:
-    """Save results to a JSON file."""
+    """Save results to a JSON file in the results/ directory."""
+    # Get the script directory and results folder
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    results_dir = os.path.join(script_dir, "results")
+
+    # Create results directory if it doesn't exist
+    os.makedirs(results_dir, exist_ok=True)
+
     if filename is None:
         filename = f"predicate_extraction_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
 
-    filepath = os.path.join(os.path.dirname(__file__), filename)
+    filepath = os.path.join(results_dir, filename)
 
     with open(filepath, 'w') as f:
         json.dump(results, f, indent=2)
 
     print(f"\n✓ Results saved to: {filepath}")
     return filepath
+
+
+def commit_and_push_results(filepath: str) -> bool:
+    """Commit and push the results file to the remote repository."""
+    try:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+
+        print("\n" + "="*60)
+        print("Committing and pushing to repository...")
+        print("="*60)
+
+        # Check if we're in a git repository
+        result = subprocess.run(
+            ["git", "rev-parse", "--git-dir"],
+            cwd=script_dir,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            print("  ✗ Not a git repository, skipping commit/push")
+            return False
+
+        # Check if there are changes to commit
+        result = subprocess.run(
+            ["git", "status", "--porcelain", "results/"],
+            cwd=script_dir,
+            capture_output=True,
+            text=True
+        )
+
+        if not result.stdout.strip():
+            print("  ℹ No changes to commit in results/")
+            return False
+
+        # Add the results file
+        print("  [1/4] Adding results file to git...")
+        result = subprocess.run(
+            ["git", "add", filepath],
+            cwd=script_dir,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            print(f"  ✗ Failed to add file: {result.stderr}")
+            return False
+        print("  ✓ File added")
+
+        # Create commit message
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
+        commit_msg = f"🔄 Update extracted predicate devices - {timestamp}"
+
+        # Commit the changes
+        print("  [2/4] Committing changes...")
+        result = subprocess.run(
+            ["git", "commit", "-m", commit_msg],
+            cwd=script_dir,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            # Check if nothing to commit
+            if "nothing to commit" in result.stdout.lower():
+                print("  ℹ No changes to commit")
+                return False
+            print(f"  ✗ Failed to commit: {result.stderr}")
+            return False
+        print("  ✓ Changes committed")
+
+        # Push the changes
+        print("  [3/4] Pushing to remote...")
+        result = subprocess.run(
+            ["git", "push"],
+            cwd=script_dir,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            print(f"  ✗ Failed to push: {result.stderr}")
+            print("  ℹ Changes committed locally but not pushed")
+            return False
+        print("  ✓ Changes pushed to remote")
+
+        print("  [4/4] Done!")
+        print("="*60)
+        return True
+
+    except Exception as e:
+        print(f"  ✗ Error during git operations: {e}")
+        return False
 
 
 def main():
@@ -422,6 +523,7 @@ def main():
     parser.add_argument("--limit", type=int, default=None, help="Limit number of K-numbers to process")
     parser.add_argument("--skip-processed", action="store_true", help="Skip K-numbers already in results file")
     parser.add_argument("--k-numbers", type=str, help="Comma-separated list of K-numbers to process")
+    parser.add_argument("--no-git", action="store_true", help="Skip git commit and push operations")
 
     args = parser.parse_args()
 
@@ -498,6 +600,12 @@ def main():
         print(f"\nResults summary:")
         print(f"  Total entries: {len(results)}")
         print(f"  File size: {os.path.getsize(filepath) / 1024:.1f} KB")
+
+        # Commit and push to repository unless --no-git flag is set
+        if not args.no_git:
+            commit_and_push_results(filepath)
+        else:
+            print("\nℹ Git operations skipped (--no-git flag set)")
 
 
 if __name__ == "__main__":
