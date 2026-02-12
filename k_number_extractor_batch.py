@@ -28,10 +28,11 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 
 # Langchain and related imports
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores.faiss import FAISS
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.schema import BaseRetriever, Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_core.documents import Document
 from pydantic import BaseModel, Field
 from sentence_transformers import CrossEncoder
 
