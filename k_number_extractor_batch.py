@@ -457,7 +457,7 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: 
         FROM {SNOWFLAKE_CONFIG['database']}.{SNOWFLAKE_CONFIG['schema']}.RAW_510K
         WHERE K_NUMBER IS NOT NULL AND K_NUMBER != ''
             AND UPPER(K_NUMBER) LIKE 'K%'
-            AND UPPER(K_NUMBER) >= 'K20'  -- Only K-numbers from year 2000 onwards
+            AND SUBSTRING(K_NUMBER, 2, 2) >= '20'  -- Extract year: K20xxxx → '20', K99xxxx → '99'
         ORDER BY K_NUMBER ASC
         LIMIT {fetch_limit} OFFSET {offset}
         """
@@ -475,23 +475,42 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: 
 
         print(f"  ✓ Fetched {len(k_numbers)} K-numbers from Snowflake (starting with 'K')")
 
-        # Update fetch offset for next run
-        if k_numbers:
-            new_offset = offset + len(k_numbers)
-            progress_data["fetch_offset"] = new_offset
-            progress_data["batch_size"] = fetch_limit
-            save_progress_data(progress_data)
-            print(f"  ✓ Fetch offset updated to: {new_offset}")
-
-        # Skip already processed K-numbers
+        # Skip already processed K-numbers BEFORE updating offset
         if skip_processed:
             processed_set = load_processed_k_numbers()
             if processed_set:
                 original_count = len(k_numbers)
                 k_numbers = [k for k in k_numbers if k not in processed_set]
                 skipped_count = original_count - len(k_numbers)
-                print(f"  ✓ Skipped {skipped_count} already processed K-numbers")
+                skip_percentage = (skipped_count / original_count * 100) if original_count > 0 else 0
+                print(f"  ✓ Skipped {skipped_count} already processed K-numbers ({skip_percentage:.1f}%)")
                 print(f"  📊 Total processed: {len(processed_set)}")
+
+                # Only update offset if less than 90% were skipped
+                # If >90% are skipped, we're in already-processed territory, don't advance
+                if skip_percentage < 90:
+                    new_offset = offset + fetch_limit
+                    progress_data["fetch_offset"] = new_offset
+                    progress_data["batch_size"] = fetch_limit
+                    save_progress_data(progress_data)
+                    print(f"  ✓ Fetch offset updated to: {new_offset}")
+                else:
+                    print(f"  ⚠ High skip rate ({skip_percentage:.1f}%), not advancing offset")
+                    print(f"  ℹ Reusing current offset: {offset}")
+            else:
+                # No processed K-numbers yet, update offset normally
+                new_offset = offset + fetch_limit
+                progress_data["fetch_offset"] = new_offset
+                progress_data["batch_size"] = fetch_limit
+                save_progress_data(progress_data)
+                print(f"  ✓ Fetch offset updated to: {new_offset}")
+        else:
+            # Not skipping processed, update offset normally
+            new_offset = offset + fetch_limit
+            progress_data["fetch_offset"] = new_offset
+            progress_data["batch_size"] = fetch_limit
+            save_progress_data(progress_data)
+            print(f"  ✓ Fetch offset updated to: {new_offset}")
 
         print(f"  📋 To process: {len(k_numbers)} K-numbers")
         print("="*60)
