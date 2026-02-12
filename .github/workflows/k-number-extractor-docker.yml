@@ -1,0 +1,124 @@
+name: K-Number Extractor - Docker Runner (ULTRA FAST)
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Number of K-numbers to process'
+        required: false
+        default: '100'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  extract-predicates-docker:
+    runs-on: ubuntu-latest
+
+    # Timeout for large batches
+    timeout-minutes: 30
+
+    # Permissions to pull from GHCR
+    permissions:
+      packages: read
+
+    steps:
+      # Step 1: Checkout repository (for aggregation script)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Step 2: Log in to GHCR
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 3: Pull latest Docker image
+      - name: Pull Docker image
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          echo "✓ Docker image pulled successfully"
+
+      # Step 4: Create .env file from secrets
+      - name: Configure environment
+        run: |
+          cat > .env << 'EOF'
+          ZAI_API_KEY=${{ secrets.ZAI_API_KEY }}
+          SNOWFLAKE_USER=${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_WAREHOUSE=${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE=${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_SCHEMA=${{ secrets.SNOWFLAKE_SCHEMA }}
+          EOF
+
+      # Step 5: Run extraction using Docker container
+      - name: Run K-Number Extractor (Docker)
+        run: |
+          docker run \
+            --env-file .env \
+            -v $(pwd)/predicate_extraction_results_*.json:/app/predicate_extraction_results_*.json:rw \
+            --rm \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            --limit 100
+        continue-on-error: true
+
+      # Step 6: Copy results from container (if needed)
+      - name: Copy results
+        run: |
+          # Check if results file was created
+          if ls predicate_extraction_results_*.json 1> /dev/null 2>&1; then
+            echo "✓ Results file found"
+          else
+            echo "⚠ No results file created in this run"
+          fi
+
+      # Step 7: Aggregate results
+      - name: Aggregate and commit results
+        run: |
+          python .github/scripts/aggregate_results.py
+        continue-on-error: true
+
+      # Step 8: Configure git
+      - name: Configure git
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+      # Step 9: Commit and push results
+      - name: Commit results
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add results/
+            git commit -m "🔄 Update extracted predicate devices (Docker) - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        continue-on-error: true
+
+      # Step 10: Upload artifacts (for debugging)
+      - name: Upload results as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extraction-results-docker
+          path: predicate_extraction_results_*.json
+          retention-days: 7
+
+      # Step 11: Notify on failure
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "⚠️ Extraction failed"
+          echo "Check logs at: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
