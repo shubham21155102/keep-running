@@ -1,0 +1,65 @@
+# K-Number Extractor Configuration
+# Copy this to config.yaml and customize as needed
+
+# API Configuration
+api:
+  # Z.ai API settings
+  zai:
+    url: "https://api.z.ai/api/anthropic/v1/messages"
+    model: "claude-opus-4-5-20251101"
+    max_tokens: 1024
+    timeout: 120
+
+# Snowflake Configuration
+snowflake:
+  account: "xy12345.us-east-1"
+  warehouse: "COMPUTE_WH"
+  database: "MEDICAL_DEVICES"
+  schema: "RAW"
+  table: "RAW_510K"
+
+# PDF Extraction Settings
+pdf:
+  # FDA PDF base URL
+  base_url: "https://www.accessdata.fda.gov/cdrh_docs"
+  timeout: 60
+  chunk_size: 2048
+  chunk_overlap: 300
+
+# Embedding & Vector Store
+embeddings:
+  model: "BAAI/bge-base-en"
+  batch_size: 56
+  cache_folder: "./models"
+
+# Reranker Configuration
+reranker:
+  model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  top_k: 3
+  enabled: true
+
+# Processing Configuration
+processing:
+  batch_size: 10
+  # Set to null for no limit
+  limit: null
+  # Skip K-numbers already processed
+  skip_processed: false
+
+# Output Configuration
+output:
+  # Output directory for results
+  directory: "./"
+  # File naming pattern
+  filename_pattern: "predicate_extraction_results_{timestamp}.json"
+  # Pretty print JSON
+  pretty_print: true
+  # Save intermediate results periodically
+  save_interval: 10
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/extractor.log"
+  console: true
