@@ -457,8 +457,8 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: 
         FROM {SNOWFLAKE_CONFIG['database']}.{SNOWFLAKE_CONFIG['schema']}.RAW_510K
         WHERE K_NUMBER IS NOT NULL AND K_NUMBER != ''
             AND UPPER(K_NUMBER) LIKE 'K%'
-            AND UPPER(K_NUMBER) >= 'K20'  -- Only K-numbers from year 2000 onwards (K20xxxx, K21xxxx, etc.)
-        ORDER BY K_NUMBER DESC
+            AND UPPER(K_NUMBER) >= 'K20'  -- Only K-numbers from year 2000 onwards
+        ORDER BY K_NUMBER ASC
         LIMIT {fetch_limit} OFFSET {offset}
         """
 
