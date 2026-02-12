@@ -367,7 +367,49 @@ def extract_predicates(kNumber: str) -> Optional[PredicateDetails]:
     return result
 
 
-def fetch_k_numbers_from_snowflake(limit: Optional[int] = None) -> List[str]:
+def get_progress_file_path() -> str:
+    """Get the path to the progress tracking file."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(script_dir, "results", ".processed_progress.json")
+
+
+def load_processed_k_numbers() -> set:
+    """Load the set of already processed K-numbers."""
+    progress_file = get_progress_file_path()
+
+    if not os.path.exists(progress_file):
+        return set()
+
+    try:
+        with open(progress_file, 'r') as f:
+            data = json.load(f)
+            return set(data.get("processed_k_numbers", []))
+    except Exception as e:
+        print(f"  ⚠ Could not load progress file: {e}")
+        return set()
+
+
+def save_processed_k_numbers(processed_set: set) -> None:
+    """Save the set of processed K-numbers."""
+    progress_file = get_progress_file_path()
+    results_dir = os.path.dirname(progress_file)
+    os.makedirs(results_dir, exist_ok=True)
+
+    try:
+        data = {
+            "processed_k_numbers": sorted(list(processed_set)),
+            "total_processed": len(processed_set),
+            "last_updated": datetime.now().isoformat()
+        }
+
+        with open(progress_file, 'w') as f:
+            json.dump(data, f, indent=2)
+
+    except Exception as e:
+        print(f"  ⚠ Could not save progress file: {e}")
+
+
+def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: bool = False) -> List[str]:
     """Fetch K-numbers from Snowflake."""
     print("\nConnecting to Snowflake...")
 
@@ -379,6 +421,7 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None) -> List[str]:
         SELECT DISTINCT K_NUMBER
         FROM {SNOWFLAKE_CONFIG['database']}.{SNOWFLAKE_CONFIG['schema']}.RAW_510K
         WHERE K_NUMBER IS NOT NULL AND K_NUMBER != ''
+            AND UPPER(K_NUMBER) LIKE 'K%'
         ORDER BY K_NUMBER
         """
 
@@ -393,7 +436,21 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None) -> List[str]:
         cursor.close()
         conn.close()
 
-        print(f"✓ Fetched {len(k_numbers)} K-numbers from Snowflake")
+        # Filter only K-numbers starting with 'K' (case-insensitive)
+        k_numbers = [k for k in k_numbers if k.upper().startswith('K')]
+
+        print(f"✓ Fetched {len(k_numbers)} K-numbers from Snowflake (starting with 'K')")
+
+        # Skip already processed K-numbers if requested
+        if skip_processed:
+            processed_set = load_processed_k_numbers()
+            if processed_set:
+                original_count = len(k_numbers)
+                k_numbers = [k for k in k_numbers if k not in processed_set]
+                skipped_count = original_count - len(k_numbers)
+                print(f"✓ Skipped {skipped_count} already processed K-numbers")
+                print(f"  Progress: {len(processed_set)} processed, {len(k_numbers)} remaining")
+
         return k_numbers
 
     except Exception as e:
@@ -534,18 +591,26 @@ def main():
     # Get K-numbers
     if args.k_numbers:
         k_numbers = [k.strip().upper() for k in args.k_numbers.split(",")]
-        print(f"\nProcessing {len(k_numbers)} specified K-numbers")
+        # Filter to only K-numbers starting with 'K'
+        k_numbers = [k for k in k_numbers if k.upper().startswith('K')]
+        print(f"\nProcessing {len(k_numbers)} specified K-numbers (starting with 'K')")
     else:
-        k_numbers = fetch_k_numbers_from_snowflake(limit=args.limit)
+        k_numbers = fetch_k_numbers_from_snowflake(limit=args.limit, skip_processed=args.skip_processed)
 
     if not k_numbers:
         print("No K-numbers to process.")
         return
 
+    # Load existing progress
+    processed_set = load_processed_k_numbers()
+    if processed_set:
+        print(f"📊 Progress tracking: {len(processed_set)} K-numbers already processed")
+
     # Process results
     results = []
     successful = 0
     failed = 0
+    newly_processed = set()
 
     print(f"\n{'='*60}")
     print(f"Processing {len(k_numbers)} K-numbers...")
@@ -566,6 +631,8 @@ def main():
                     'timestamp': datetime.now().isoformat()
                 })
                 successful += 1
+                # Mark as processed
+                newly_processed.add(kNumber)
             else:
                 results.append({
                     'k_number': kNumber,
@@ -574,6 +641,8 @@ def main():
                     'timestamp': datetime.now().isoformat()
                 })
                 failed += 1
+                # Still mark as processed (attempted)
+                newly_processed.add(kNumber)
 
         except Exception as e:
             print(f"\n✗ Error processing {kNumber}: {e}")
@@ -593,6 +662,13 @@ def main():
     print(f"Successful: {successful} ✓")
     print(f"Failed: {failed} ✗")
     print(f"Success rate: {successful/len(k_numbers)*100:.1f}%")
+
+    # Update progress tracking
+    if newly_processed:
+        processed_set.update(newly_processed)
+        save_processed_k_numbers(processed_set)
+        print(f"\n📊 Progress updated: {len(processed_set)} total K-numbers processed")
+        print(f"  New in this run: {len(newly_processed)}")
 
     # Save results
     if results:

@@ -42,6 +42,8 @@ env/
 predicate_extraction_results_*.json
 *.json.bak
 !results/
+# Exclude progress tracking file from git
+results/.processed_progress.json
 logs/
 
 # Models cache
