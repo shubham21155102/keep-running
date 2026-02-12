@@ -373,45 +373,80 @@ def get_progress_file_path() -> str:
     return os.path.join(script_dir, "results", ".processed_progress.json")
 
 
-def load_processed_k_numbers() -> set:
-    """Load the set of already processed K-numbers."""
+def load_progress_data() -> Dict:
+    """Load the entire progress data including fetch tracking."""
     progress_file = get_progress_file_path()
 
     if not os.path.exists(progress_file):
-        return set()
+        return {
+            "fetch_offset": 0,
+            "batch_size": 100,
+            "processed_k_numbers": [],
+            "total_processed": 0,
+            "last_updated": None
+        }
 
     try:
         with open(progress_file, 'r') as f:
-            data = json.load(f)
-            return set(data.get("processed_k_numbers", []))
+            return json.load(f)
     except Exception as e:
         print(f"  ⚠ Could not load progress file: {e}")
-        return set()
+        return {
+            "fetch_offset": 0,
+            "batch_size": 100,
+            "processed_k_numbers": [],
+            "total_processed": 0,
+            "last_updated": None
+        }
 
 
-def save_processed_k_numbers(processed_set: set) -> None:
-    """Save the set of processed K-numbers."""
+def save_progress_data(progress_data: Dict) -> None:
+    """Save the entire progress data."""
     progress_file = get_progress_file_path()
     results_dir = os.path.dirname(progress_file)
     os.makedirs(results_dir, exist_ok=True)
 
     try:
-        data = {
-            "processed_k_numbers": sorted(list(processed_set)),
-            "total_processed": len(processed_set),
-            "last_updated": datetime.now().isoformat()
-        }
+        progress_data["last_updated"] = datetime.now().isoformat()
+        progress_data["total_processed"] = len(progress_data.get("processed_k_numbers", []))
 
         with open(progress_file, 'w') as f:
-            json.dump(data, f, indent=2)
+            json.dump(progress_data, f, indent=2)
 
     except Exception as e:
         print(f"  ⚠ Could not save progress file: {e}")
 
 
-def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: bool = False) -> List[str]:
-    """Fetch K-numbers from Snowflake."""
-    print("\nConnecting to Snowflake...")
+def load_processed_k_numbers() -> set:
+    """Load the set of already processed K-numbers."""
+    progress_data = load_progress_data()
+    return set(progress_data.get("processed_k_numbers", []))
+
+
+def save_processed_k_numbers(processed_set: set) -> None:
+    """Save the set of processed K-numbers (updates fetch offset)."""
+    progress_data = load_progress_data()
+    progress_data["processed_k_numbers"] = sorted(list(processed_set))
+    save_progress_data(progress_data)
+
+
+def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: bool = True, batch_size: int = 100) -> List[str]:
+    """Fetch K-numbers from Snowflake with pagination."""
+    # Load progress to get current offset
+    progress_data = load_progress_data()
+    offset = progress_data.get("fetch_offset", 0)
+
+    # Use provided limit or batch_size from progress or default
+    if limit:
+        fetch_limit = limit
+    else:
+        fetch_limit = progress_data.get("batch_size", batch_size)
+
+    print("\n" + "="*60)
+    print("Fetching K-numbers from Snowflake")
+    print("="*60)
+    print(f"  Offset: {offset}")
+    print(f"  Batch size: {fetch_limit}")
 
     try:
         conn = snowflake.connector.connect(**SNOWFLAKE_CONFIG)
@@ -423,12 +458,10 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: 
         WHERE K_NUMBER IS NOT NULL AND K_NUMBER != ''
             AND UPPER(K_NUMBER) LIKE 'K%'
         ORDER BY K_NUMBER
+        LIMIT {fetch_limit} OFFSET {offset}
         """
 
-        if limit:
-            query += f" LIMIT {limit}"
-
-        print(f"Executing query...")
+        print(f"  Executing query...")
         cursor.execute(query)
 
         k_numbers = [row[0] for row in cursor.fetchall()]
@@ -439,22 +472,33 @@ def fetch_k_numbers_from_snowflake(limit: Optional[int] = None, skip_processed: 
         # Filter only K-numbers starting with 'K' (case-insensitive)
         k_numbers = [k for k in k_numbers if k.upper().startswith('K')]
 
-        print(f"✓ Fetched {len(k_numbers)} K-numbers from Snowflake (starting with 'K')")
+        print(f"  ✓ Fetched {len(k_numbers)} K-numbers from Snowflake (starting with 'K')")
 
-        # Skip already processed K-numbers if requested
+        # Update fetch offset for next run
+        if k_numbers:
+            new_offset = offset + len(k_numbers)
+            progress_data["fetch_offset"] = new_offset
+            progress_data["batch_size"] = fetch_limit
+            save_progress_data(progress_data)
+            print(f"  ✓ Fetch offset updated to: {new_offset}")
+
+        # Skip already processed K-numbers
         if skip_processed:
             processed_set = load_processed_k_numbers()
             if processed_set:
                 original_count = len(k_numbers)
                 k_numbers = [k for k in k_numbers if k not in processed_set]
                 skipped_count = original_count - len(k_numbers)
-                print(f"✓ Skipped {skipped_count} already processed K-numbers")
-                print(f"  Progress: {len(processed_set)} processed, {len(k_numbers)} remaining")
+                print(f"  ✓ Skipped {skipped_count} already processed K-numbers")
+                print(f"  📊 Total processed: {len(processed_set)}")
+
+        print(f"  📋 To process: {len(k_numbers)} K-numbers")
+        print("="*60)
 
         return k_numbers
 
     except Exception as e:
-        print(f"✗ Error connecting to Snowflake: {e}")
+        print(f"  ✗ Error connecting to Snowflake: {e}")
         raise
 
 
@@ -577,12 +621,22 @@ def main():
     parser = argparse.ArgumentParser(
         description="Batch K-number predicate device extractor using Z.ai API"
     )
-    parser.add_argument("--limit", type=int, default=None, help="Limit number of K-numbers to process")
-    parser.add_argument("--skip-processed", action="store_true", help="Skip K-numbers already in results file")
+    parser.add_argument("--limit", type=int, default=None, help="Override batch size for this run")
+    parser.add_argument("--batch-size", type=int, default=100, help="Batch size for pagination (default: 100)")
+    parser.add_argument("--skip-processed", action="store_true", default=True, help="Skip K-numbers already processed (default: True)")
+    parser.add_argument("--include-processed", action="store_true", help="Include already processed K-numbers")
     parser.add_argument("--k-numbers", type=str, help="Comma-separated list of K-numbers to process")
     parser.add_argument("--no-git", action="store_true", help="Skip git commit and push operations")
+    parser.add_argument("--reset-pagination", action="store_true", help="Reset fetch offset to 0")
 
     args = parser.parse_args()
+
+    # Handle pagination reset
+    if args.reset_pagination:
+        progress_data = load_progress_data()
+        progress_data["fetch_offset"] = 0
+        save_progress_data(progress_data)
+        print("✓ Fetch offset reset to 0")
 
     print("\n" + "="*60)
     print("  K-NUMBER PREDICATE DEVICE EXTRACTOR (BATCH MODE)")
@@ -595,7 +649,10 @@ def main():
         k_numbers = [k for k in k_numbers if k.upper().startswith('K')]
         print(f"\nProcessing {len(k_numbers)} specified K-numbers (starting with 'K')")
     else:
-        k_numbers = fetch_k_numbers_from_snowflake(limit=args.limit, skip_processed=args.skip_processed)
+        # Determine skip_processed flag
+        skip_processed = not args.include_processed
+        batch_size = args.limit if args.limit else args.batch_size
+        k_numbers = fetch_k_numbers_from_snowflake(limit=batch_size, skip_processed=skip_processed)
 
     if not k_numbers:
         print("No K-numbers to process.")
