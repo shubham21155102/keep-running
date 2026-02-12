@@ -20,6 +20,10 @@ jobs:
     # Increase timeout to handle large batches
     timeout-minutes: 30
 
+    # Permissions to push to repository
+    permissions:
+      contents: write
+
     steps:
       # Step 1: Checkout repository
       - name: Checkout repository
@@ -93,7 +97,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extraction-results
-          path: predicate_extraction_results_*.json
+          path: results/
           retention-days: 7
 
       # Step 10: Notify on failure

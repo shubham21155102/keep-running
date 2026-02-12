@@ -24,9 +24,10 @@ jobs:
     # Timeout for large batches
     timeout-minutes: 30
 
-    # Permissions to pull from GHCR
+    # Permissions to pull from GHCR and push to repository
     permissions:
       packages: read
+      contents: write
 
     steps:
       # Step 1: Checkout repository (for aggregation script)
@@ -67,7 +68,7 @@ jobs:
         run: |
           docker run \
             --env-file .env \
-            -v $(pwd)/predicate_extraction_results_*.json:/app/predicate_extraction_results_*.json:rw \
+            -v $(pwd)/results:/app/results:rw \
             --rm \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             --limit 100
@@ -113,7 +114,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: extraction-results-docker
-          path: predicate_extraction_results_*.json
+          path: results/
           retention-days: 7
 
       # Step 11: Notify on failure
