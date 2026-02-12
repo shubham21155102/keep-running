@@ -1,0 +1,131 @@
+name: K-Number Extractor - Scheduled Runner (FAST)
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Number of K-numbers to process'
+        required: false
+        default: '100'
+
+jobs:
+  extract-predicates:
+    runs-on: ubuntu-latest
+
+    # Increase timeout to handle large batches
+    timeout-minutes: 30
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Step 2: Set up Python with cache
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # Step 3: Cache pip packages
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements-minimal.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # Step 4: Cache Python site-packages
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.Python_ROOT_DIR }}/lib/python3.11/site-packages
+          key: ${{ runner.os }}-python-${{ hashFiles('requirements-minimal.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-
+
+      # Step 5: Cache HuggingFace models
+      - name: Cache HuggingFace models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: ${{ runner.os }}-hf-models-${{ hashFiles('k_number_extractor_batch.py') }}
+          restore-keys: |
+            ${{ runner.os }}-hf-models-
+
+      # Step 6: Install dependencies (fast with cache)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install --no-cache-dir -r requirements-minimal.txt
+        working-directory: .
+
+      # Step 7: Create .env file from secrets
+      - name: Configure environment
+        run: |
+          cat > .env << 'EOF'
+          ZAI_API_KEY=${{ secrets.ZAI_API_KEY }}
+          SNOWFLAKE_USER=${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD=${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ACCOUNT=${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_WAREHOUSE=${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE=${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_SCHEMA=${{ secrets.SNOWFLAKE_SCHEMA }}
+          EOF
+        working-directory: .
+
+      # Step 8: Run extractor with limit 100
+      - name: Run K-Number Extractor
+        run: |
+          python k_number_extractor_batch.py --limit 100
+        working-directory: .
+        continue-on-error: true
+
+      # Step 9: Aggregate and commit results
+      - name: Aggregate and commit results
+        run: |
+          python .github/scripts/aggregate_results.py
+        working-directory: .
+        continue-on-error: true
+
+      # Step 10: Git configuration
+      - name: Configure git
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+      # Step 11: Commit and push results
+      - name: Commit results
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add results/
+            git commit -m "🔄 Update extracted predicate devices - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        continue-on-error: true
+
+      # Step 12: Upload artifacts (for debugging)
+      - name: Upload results as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extraction-results
+          path: predicate_extraction_results_*.json
+          retention-days: 7
+
+      # Step 13: Notify on failure
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "⚠️ Extraction failed. Check logs for details."
+          echo "Workflow URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

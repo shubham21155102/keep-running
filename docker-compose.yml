@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  k-number-extractor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: k-number-extractor
+
+    # Mount current directory
+    volumes:
+      - .:/app
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ./results:/app/results
+
+    # Environment variables
+    env_file:
+      - .env
+
+    environment:
+      PYTHONUNBUFFERED: 1
+      TOKENIZERS_PARALLELISM: 'true'
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+
+    # Restart policy
+    restart: no
+
+    # Logging
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  # Optional: For scheduled runs
+  scheduler:
+    image: mcuadros/ofelia:latest
+    container_name: k-number-scheduler
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    command: daemon --docker
+
+    # Label for scheduling
+    labels:
+      ofelia.enabled: 'true'
+      ofelia.job-exec.k-extractor-job.schedule: '@every 5m'
+      ofelia.job-exec.k-extractor-job.container: 'k-number-extractor'
+      ofelia.job-exec.k-extractor-job.command: 'python k_number_extractor_batch.py --limit 100'
+
+    restart: unless-stopped
