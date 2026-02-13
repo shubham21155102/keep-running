@@ -164,7 +164,7 @@ def get_context(knumber: str, retriever: EnhancedGDNCRetriever) -> str:
     Reference Device Name, Primary Predicate Device Name for docs {knumber}.
     """
     pmt = prompt.strip()
-    docs_cfr = retriever.get_relevant_documents(pmt)
+    docs_cfr = retriever.invoke(pmt)
     return format_docs(docs_cfr)
 
 
