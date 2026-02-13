@@ -1,5 +1,605 @@
 [
   {
+    "k_number": "K200001",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:02:17.330119"
+  },
+  {
+    "k_number": "K200002",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:02:29.564674"
+  },
+  {
+    "k_number": "K200003",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:02:36.022925"
+  },
+  {
+    "k_number": "K200005",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:02:43.172069"
+  },
+  {
+    "k_number": "K200007",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:02:49.060050"
+  },
+  {
+    "k_number": "K200009",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:03:13.938350"
+  },
+  {
+    "k_number": "K200010",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:03:19.736152"
+  },
+  {
+    "k_number": "K200011",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:03:25.379241"
+  },
+  {
+    "k_number": "K200015",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:03:36.071907"
+  },
+  {
+    "k_number": "K200016",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:03:45.747433"
+  },
+  {
+    "k_number": "K200017",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:06.397535"
+  },
+  {
+    "k_number": "K200018",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:13.069898"
+  },
+  {
+    "k_number": "K200019",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:14.922842"
+  },
+  {
+    "k_number": "K200021",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:18.173867"
+  },
+  {
+    "k_number": "K200022",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:25.173831"
+  },
+  {
+    "k_number": "K200023",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:32.399814"
+  },
+  {
+    "k_number": "K200024",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:40.766455"
+  },
+  {
+    "k_number": "K200025",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:49.197813"
+  },
+  {
+    "k_number": "K200026",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:04:54.027272"
+  },
+  {
+    "k_number": "K200027",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:02.593600"
+  },
+  {
+    "k_number": "K200028",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:06.729057"
+  },
+  {
+    "k_number": "K200030",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:12.002083"
+  },
+  {
+    "k_number": "K200031",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:25.329626"
+  },
+  {
+    "k_number": "K200032",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:32.219631"
+  },
+  {
+    "k_number": "K200033",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:37.049771"
+  },
+  {
+    "k_number": "K200035",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:42.612720"
+  },
+  {
+    "k_number": "K200036",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:50.170067"
+  },
+  {
+    "k_number": "K200037",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:05:58.798908"
+  },
+  {
+    "k_number": "K200038",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:06.495908"
+  },
+  {
+    "k_number": "K200039",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:12.055225"
+  },
+  {
+    "k_number": "K200040",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:18.934125"
+  },
+  {
+    "k_number": "K200041",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:23.727285"
+  },
+  {
+    "k_number": "K200042",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:28.354183"
+  },
+  {
+    "k_number": "K200043",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:33.788206"
+  },
+  {
+    "k_number": "K200044",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:44.975875"
+  },
+  {
+    "k_number": "K200045",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:50.735732"
+  },
+  {
+    "k_number": "K200047",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:06:56.985824"
+  },
+  {
+    "k_number": "K200048",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:03.518203"
+  },
+  {
+    "k_number": "K200049",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:08.015385"
+  },
+  {
+    "k_number": "K200050",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:12.121588"
+  },
+  {
+    "k_number": "K200051",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:21.515056"
+  },
+  {
+    "k_number": "K200052",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:27.759407"
+  },
+  {
+    "k_number": "K200053",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:32.795647"
+  },
+  {
+    "k_number": "K200056",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:40.809960"
+  },
+  {
+    "k_number": "K200057",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:47.115911"
+  },
+  {
+    "k_number": "K200060",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:51.833448"
+  },
+  {
+    "k_number": "K200061",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:07:58.042471"
+  },
+  {
+    "k_number": "K200062",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:03.423850"
+  },
+  {
+    "k_number": "K200063",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:10.547039"
+  },
+  {
+    "k_number": "K200064",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:14.806800"
+  },
+  {
+    "k_number": "K200065",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:32.965176"
+  },
+  {
+    "k_number": "K200066",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:37.704344"
+  },
+  {
+    "k_number": "K200067",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:42.156016"
+  },
+  {
+    "k_number": "K200068",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:45.701082"
+  },
+  {
+    "k_number": "K200069",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:52.608712"
+  },
+  {
+    "k_number": "K200070",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:08:56.911288"
+  },
+  {
+    "k_number": "K200071",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:02.142953"
+  },
+  {
+    "k_number": "K200072",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:11.184169"
+  },
+  {
+    "k_number": "K200073",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:15.702282"
+  },
+  {
+    "k_number": "K200074",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:23.355490"
+  },
+  {
+    "k_number": "K200075",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:29.613679"
+  },
+  {
+    "k_number": "K200076",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:36.204855"
+  },
+  {
+    "k_number": "K200077",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:40.535708"
+  },
+  {
+    "k_number": "K200078",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:48.385613"
+  },
+  {
+    "k_number": "K200079",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:09:54.320030"
+  },
+  {
+    "k_number": "K200081",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:03.497784"
+  },
+  {
+    "k_number": "K200082",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:07.402707"
+  },
+  {
+    "k_number": "K200083",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:11.298884"
+  },
+  {
+    "k_number": "K200084",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:16.541712"
+  },
+  {
+    "k_number": "K200087",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:20.872132"
+  },
+  {
+    "k_number": "K200088",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:35.529406"
+  },
+  {
+    "k_number": "K200089",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:42.909660"
+  },
+  {
+    "k_number": "K200090",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:51.859375"
+  },
+  {
+    "k_number": "K200091",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:10:55.760893"
+  },
+  {
+    "k_number": "K200092",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:04.963927"
+  },
+  {
+    "k_number": "K200093",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:07.497153"
+  },
+  {
+    "k_number": "K200094",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:11.423265"
+  },
+  {
+    "k_number": "K200095",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:15.552048"
+  },
+  {
+    "k_number": "K200096",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:22.726145"
+  },
+  {
+    "k_number": "K200097",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:27.498645"
+  },
+  {
+    "k_number": "K200098",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:32.087660"
+  },
+  {
+    "k_number": "K200099",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:39.556158"
+  },
+  {
+    "k_number": "K200100",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:44.851699"
+  },
+  {
+    "k_number": "K200101",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:50.448816"
+  },
+  {
+    "k_number": "K200102",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:11:59.078048"
+  },
+  {
+    "k_number": "K200103",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:12:20.834303"
+  },
+  {
+    "k_number": "K200104",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:12:26.334717"
+  },
+  {
+    "k_number": "K200107",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:12:35.629711"
+  },
+  {
+    "k_number": "K200108",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:12:40.333646"
+  },
+  {
+    "k_number": "K200109",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:12:45.991780"
+  },
+  {
+    "k_number": "K200110",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:07.331505"
+  },
+  {
+    "k_number": "K200112",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:28.713864"
+  },
+  {
+    "k_number": "K200113",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:32.558970"
+  },
+  {
+    "k_number": "K200114",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:38.981862"
+  },
+  {
+    "k_number": "K200115",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:42.218930"
+  },
+  {
+    "k_number": "K200116",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:50.289499"
+  },
+  {
+    "k_number": "K200117",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:13:58.494192"
+  },
+  {
+    "k_number": "K200118",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:14:04.462043"
+  },
+  {
+    "k_number": "K200119",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:14:11.947077"
+  },
+  {
+    "k_number": "K200120",
+    "success": false,
+    "error": "'EnhancedGDNCRetriever' object has no attribute 'get_relevant_documents'",
+    "timestamp": "2026-02-13T22:14:16.361212"
+  },
+  {
     "k_number": "K213241",
     "success": true,
     "predicates": [
