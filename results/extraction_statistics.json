@@ -11,10 +11,10 @@
   "unique_parent_devices": 1,
   "unique_child_devices": 0,
   "run_info": {
-    "github_server": "N/A",
-    "github_repository": "N/A",
-    "github_run_id": "N/A",
-    "github_run_number": "N/A",
-    "github_ref": "N/A"
+    "github_server": "https://github.com",
+    "github_repository": "shubham21155102/keep-running",
+    "github_run_id": "22003950543",
+    "github_run_number": "59",
+    "github_ref": "refs/heads/main"
   }
 }
