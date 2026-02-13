@@ -42,7 +42,7 @@ def aggregate_results():
         print(f"[+] Loaded {len(existing_results)} existing results")
 
     # Find all extraction result files in current directory
-    result_files = list(Path(".").glob("predicate_extraction_results_*.json"))
+    result_files = list(Path("results").glob("predicate_extraction_results_*.json"))
     print(f"[+] Found {len(result_files)} extraction result file(s)")
 
     new_count = 0
@@ -104,14 +104,18 @@ def generate_statistics(results: List[Dict], new_count: int, updated_count: int)
     successful = sum(1 for r in results if r.get('success'))
     failed = total - successful
 
-    # Aggregate predicates and similar devices
+    # Aggregate predicates, similar, parent, and child devices
     all_predicates = set()
     all_similar = set()
+    all_parent = set()
+    all_child = set()
 
     for result in results:
         if result.get('success'):
             all_predicates.update(result.get('predicates', []))
             all_similar.update(result.get('similar_devices', []))
+            all_parent.update(result.get('parent_devices', []))
+            all_child.update(result.get('child_devices', []))
 
     return {
         "timestamp": datetime.now().isoformat(),
@@ -123,6 +127,8 @@ def generate_statistics(results: List[Dict], new_count: int, updated_count: int)
         "updated_in_current_run": updated_count,
         "unique_predicates": len(all_predicates),
         "unique_similar_devices": len(all_similar),
+        "unique_parent_devices": len(all_parent),
+        "unique_child_devices": len(all_child),
         "run_info": {
             "github_server": os.getenv('GITHUB_SERVER_URL', 'N/A'),
             "github_repository": os.getenv('GITHUB_REPOSITORY', 'N/A'),

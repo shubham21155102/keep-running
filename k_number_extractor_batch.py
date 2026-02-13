@@ -50,7 +50,9 @@ load_dotenv()
 # Configuration
 TOKENIZERS_PARALLELISM = True
 ZAI_API_KEY = os.getenv("ZAI_API_KEY")
-ZAI_API_URL = "https://api.z.ai/api/anthropic/v1/messages"
+ZAI_BASE_URL = os.getenv("ZAI_BASE_URL", "https://api.z.ai/api/anthropic")
+ZAI_API_URL = f"{ZAI_BASE_URL}/v1/messages"
+LLM_MODEL = os.getenv("LLM_MODEL", "claude-opus-4-5-20251101")
 
 if not ZAI_API_KEY:
     raise ValueError("Please set ZAI_API_KEY environment variable.")
@@ -118,6 +120,14 @@ class PredicateDetails(BaseModel):
     similar_devices: List[str] = Field(
         default_factory=list,
         description="List of similar or equivalent device K-numbers."
+    )
+    parent_devices: List[str] = Field(
+        default_factory=list,
+        description="List of parent/reference device K-numbers."
+    )
+    child_devices: List[str] = Field(
+        default_factory=list,
+        description="List of child device K-numbers."
     )
 
 
@@ -211,25 +221,33 @@ def call_zai_api(context: str, kNumber: str) -> Optional[str]:
     """Call Z.ai API to extract predicate devices."""
     llm_prompt_content = f"""
     You are an expert on CDRH 510(k) device predicates and references—especially experienced
-    in extracting FDA 510(k) numbers and relationships (predicates and their children) from regulatory documents.
+    in extracting FDA 510(k) numbers and relationships from regulatory documents.
 
-    **First Look for: PREDICATE DEVICE or this kind of phrase in the document. If found, extract**
-    **After that look for *Reference device*. If present then that will be parent_references device number.**
+    From the context below, extract ALL device K-numbers into these 4 categories:
 
-    1. **predicate K‑numbers**
-    2. **Reference or similar or equivalent or child K‑numbers** (secondary predicates, references, etc.)
-    - Return a structured JSON output exactly in this format:
+    1. **predicate_devices** — The primary predicate device(s) listed under "PREDICATE DEVICE" or "Primary Predicate Device Name". These are the devices that the subject device claims substantial equivalence to.
+    2. **similar_devices** — Any devices listed as "similar", "equivalent", or "substantially equivalent" that are NOT the primary predicate.
+    3. **parent_devices** — Any "Reference Device" or parent device K-numbers. These are devices that the predicate itself was cleared against (the predicate's own predicates).
+    4. **child_devices** — Any child or downstream device K-numbers that reference the subject device as their predicate.
+
+    Rules:
+    - Only include valid K-numbers (format: K followed by 6-7 digits).
+    - Do NOT include the subject device {kNumber} itself in any list.
+    - If a category has no matches, return an empty list.
+    - Return ONLY the JSON, no explanation.
 
     Context:
     {context}
 
-    Question: Give me PREDICATE DEVICE, Reference Device details for {kNumber}
+    Question: Extract all predicate, similar, parent, and child device K-numbers for {kNumber}.
 
     Answer:
     ```json
     {{
         "predicate_devices": [ "K#######", ... ],
-        "similar_devices": [ "K#######", ... ]
+        "similar_devices": [ "K#######", ... ],
+        "parent_devices": [ "K#######", ... ],
+        "child_devices": [ "K#######", ... ]
     }}
     ```
     """
@@ -241,7 +259,7 @@ def call_zai_api(context: str, kNumber: str) -> Optional[str]:
     }
 
     payload = {
-        "model": "claude-opus-4-5-20251101",
+        "model": LLM_MODEL,
         "max_tokens": 1024,
         "messages": [
             {"role": "user", "content": llm_prompt_content}
@@ -357,12 +375,16 @@ def extract_predicates(kNumber: str) -> Optional[PredicateDetails]:
 
     result = PredicateDetails(
         predicate_devices=parsed_json.get("predicate_devices", []),
-        similar_devices=parsed_json.get("similar_devices", [])
+        similar_devices=parsed_json.get("similar_devices", []),
+        parent_devices=parsed_json.get("parent_devices", []),
+        child_devices=parsed_json.get("child_devices", [])
     )
 
     print(f"  ✓ Extraction complete")
     print(f"    - Predicates: {len(result.predicate_devices)}")
     print(f"    - Similar devices: {len(result.similar_devices)}")
+    print(f"    - Parent devices: {len(result.parent_devices)}")
+    print(f"    - Child devices: {len(result.child_devices)}")
 
     return result
 
@@ -705,6 +727,8 @@ def main():
                     'success': True,
                     'predicates': result.predicate_devices,
                     'similar_devices': result.similar_devices,
+                    'parent_devices': result.parent_devices,
+                    'child_devices': result.child_devices,
                     'timestamp': datetime.now().isoformat()
                 })
                 successful += 1
