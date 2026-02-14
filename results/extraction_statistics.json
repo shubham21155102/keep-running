@@ -1,20 +1,20 @@
 {
-  "timestamp": "2026-02-14T07:02:44.210295",
+  "timestamp": "2026-02-14T07:23:05.765385",
   "total_k_numbers": 108,
   "successful": 107,
   "failed": 1,
   "success_rate": 99.07407407407408,
   "new_in_current_run": 0,
-  "updated_in_current_run": 88,
-  "unique_predicates": 129,
-  "unique_similar_devices": 34,
-  "unique_parent_devices": 26,
+  "updated_in_current_run": 85,
+  "unique_predicates": 125,
+  "unique_similar_devices": 45,
+  "unique_parent_devices": 18,
   "unique_child_devices": 0,
   "run_info": {
     "github_server": "https://github.com",
     "github_repository": "shubham21155102/keep-running",
-    "github_run_id": "22012943936",
-    "github_run_number": "88",
+    "github_run_id": "22013199955",
+    "github_run_number": "89",
     "github_ref": "refs/heads/main"
   }
 }
