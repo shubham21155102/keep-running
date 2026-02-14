@@ -12,14 +12,9 @@
       "K171233",
       "K180599"
     ],
-    "parent_devices": [
-      "K180912",
-      "K181637",
-      "K171233",
-      "K180599"
-    ],
+    "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:36:55.788411"
+    "timestamp": "2026-02-14T17:50:42.218839"
   },
   {
     "k_number": "K200002",
@@ -37,19 +32,18 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:37:12.201596"
+    "timestamp": "2026-02-14T17:51:09.272743"
   },
   {
     "k_number": "K200005",
     "success": true,
     "predicates": [
-      "K173785",
-      "K182826"
+      "K173785"
     ],
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:11:59.004487"
+    "timestamp": "2026-02-14T17:51:18.826342"
   },
   {
     "k_number": "K200007",
@@ -60,7 +54,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:37:24.467277"
+    "timestamp": "2026-02-14T17:51:27.259079"
   },
   {
     "k_number": "K200009",
@@ -69,7 +63,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:12:33.973017"
+    "timestamp": "2026-02-14T17:51:54.228995"
   },
   {
     "k_number": "K200010",
@@ -80,7 +74,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:37:49.487028"
+    "timestamp": "2026-02-14T17:52:02.818232"
   },
   {
     "k_number": "K200011",
@@ -97,7 +91,7 @@
       "K061844"
     ],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:37:55.031035"
+    "timestamp": "2026-02-14T17:52:10.797683"
   },
   {
     "k_number": "K200015",
@@ -110,7 +104,7 @@
     ],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:38:04.585444"
+    "timestamp": "2026-02-14T17:52:23.441227"
   },
   {
     "k_number": "K200016",
@@ -122,7 +116,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T16:00:40.540248"
+    "timestamp": "2026-02-14T17:52:35.933164"
   },
   {
     "k_number": "K200017",
@@ -131,7 +125,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:13:36.398718"
+    "timestamp": "2026-02-14T17:52:59.681519"
   },
   {
     "k_number": "K200018",
@@ -140,7 +134,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:38:34.359724"
+    "timestamp": "2026-02-14T17:53:08.969312"
   },
   {
     "k_number": "K200019",
@@ -149,7 +143,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:13:48.115799"
+    "timestamp": "2026-02-14T17:53:12.393810"
   },
   {
     "k_number": "K200021",
@@ -160,7 +154,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:38:40.735501"
+    "timestamp": "2026-02-14T17:53:17.706729"
   },
   {
     "k_number": "K200022",
@@ -169,7 +163,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:38:46.955643"
+    "timestamp": "2026-02-14T17:53:26.750209"
   },
   {
     "k_number": "K200023",
@@ -180,7 +174,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:38:53.756834"
+    "timestamp": "2026-02-14T17:53:36.191539"
   },
   {
     "k_number": "K200024",
@@ -223,7 +217,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:14:49.411342"
+    "timestamp": "2026-02-14T17:54:13.671901"
   },
   {
     "k_number": "K200028",
@@ -237,7 +231,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:39:26.637251"
+    "timestamp": "2026-02-14T17:54:22.645045"
   },
   {
     "k_number": "K200030",
@@ -248,7 +242,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:39:32.309618"
+    "timestamp": "2026-02-14T17:54:30.646107"
   },
   {
     "k_number": "K200031",
@@ -270,7 +264,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:39:49.979573"
+    "timestamp": "2026-02-14T17:54:54.238738"
   },
   {
     "k_number": "K200033",
@@ -281,7 +275,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:39:54.737221"
+    "timestamp": "2026-02-14T17:55:00.896656"
   },
   {
     "k_number": "K200035",
@@ -292,7 +286,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:15:42.281108"
+    "timestamp": "2026-02-14T17:55:10.367782"
   },
   {
     "k_number": "K200036",
@@ -305,7 +299,7 @@
       "K113485"
     ],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:15:52.564631"
+    "timestamp": "2026-02-14T17:55:19.807728"
   },
   {
     "k_number": "K200037",
@@ -318,7 +312,7 @@
       "K103255"
     ],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:40:15.575162"
+    "timestamp": "2026-02-14T17:55:30.462885"
   },
   {
     "k_number": "K200038",
@@ -342,7 +336,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:40:34.127121"
+    "timestamp": "2026-02-14T17:55:47.335047"
   },
   {
     "k_number": "K200040",
@@ -365,7 +359,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:40:46.987387"
+    "timestamp": "2026-02-14T17:56:02.574647"
   },
   {
     "k_number": "K200042",
@@ -392,7 +386,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:16:49.368676"
+    "timestamp": "2026-02-14T17:56:16.970985"
   },
   {
     "k_number": "K200044",
@@ -412,7 +406,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:17:10.386107"
+    "timestamp": "2026-02-14T17:56:37.292416"
   },
   {
     "k_number": "K200047",
@@ -427,7 +421,7 @@
     ],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:41:18.984039"
+    "timestamp": "2026-02-14T17:56:45.478036"
   },
   {
     "k_number": "K200048",
@@ -441,7 +435,7 @@
     ],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:41:26.088713"
+    "timestamp": "2026-02-14T17:56:54.203177"
   },
   {
     "k_number": "K200049",
@@ -454,7 +448,7 @@
       "K152848"
     ],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:41:31.079758"
+    "timestamp": "2026-02-14T17:57:00.457366"
   },
   {
     "k_number": "K200050",
@@ -465,7 +459,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:41:35.759235"
+    "timestamp": "2026-02-14T17:57:06.885490"
   },
   {
     "k_number": "K200051",
@@ -476,7 +470,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:41:44.360968"
+    "timestamp": "2026-02-14T17:57:18.063841"
   },
   {
     "k_number": "K200052",
@@ -487,7 +481,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:41:52.577441"
+    "timestamp": "2026-02-14T17:57:26.833446"
   },
   {
     "k_number": "K200053",
@@ -506,23 +500,25 @@
     "predicates": [
       "K182083"
     ],
-    "similar_devices": [],
+    "similar_devices": [
+      "K182795"
+    ],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:18:29.376149"
+    "timestamp": "2026-02-14T17:57:43.425054"
   },
   {
     "k_number": "K200057",
     "success": true,
-    "predicates": [],
-    "similar_devices": [
+    "predicates": [
       "K142056",
       "K172228",
       "K182965"
     ],
+    "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:18:37.668103"
+    "timestamp": "2026-02-14T17:57:52.226089"
   },
   {
     "k_number": "K200060",
@@ -533,7 +529,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:42:15.742312"
+    "timestamp": "2026-02-14T17:57:59.163287"
   },
   {
     "k_number": "K200061",
@@ -547,7 +543,7 @@
       "K060390"
     ],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:42:21.964922"
+    "timestamp": "2026-02-14T17:58:07.490171"
   },
   {
     "k_number": "K200062",
@@ -566,7 +562,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:42:27.830478"
+    "timestamp": "2026-02-14T17:58:16.198777"
   },
   {
     "k_number": "K200063",
@@ -772,7 +768,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:44:16.593189"
+    "timestamp": "2026-02-14T18:00:32.434173"
   },
   {
     "k_number": "K200081",
@@ -821,9 +817,11 @@
     "similar_devices": [
       "K122097"
     ],
-    "parent_devices": [],
+    "parent_devices": [
+      "K180076"
+    ],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:21:56.953338"
+    "timestamp": "2026-02-14T18:01:01.590673"
   },
   {
     "k_number": "K200087",
@@ -832,21 +830,20 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:22:03.104903"
+    "timestamp": "2026-02-14T18:01:07.897426"
   },
   {
     "k_number": "K200088",
     "success": true,
     "predicates": [
-      "K080950",
-      "K031017"
+      "K080950"
     ],
     "similar_devices": [
-      "K053266"
+      "K031017"
     ],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:44:54.429728"
+    "timestamp": "2026-02-14T18:01:24.702824"
   },
   {
     "k_number": "K200089",
@@ -857,7 +854,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:22:29.590196"
+    "timestamp": "2026-02-14T18:01:34.040917"
   },
   {
     "k_number": "K200090",
@@ -866,7 +863,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:22:40.570891"
+    "timestamp": "2026-02-14T18:01:44.768929"
   },
   {
     "k_number": "K200091",
@@ -875,7 +872,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:45:14.329801"
+    "timestamp": "2026-02-14T18:01:50.603430"
   },
   {
     "k_number": "K200092",
@@ -886,7 +883,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:45:22.331545"
+    "timestamp": "2026-02-14T18:02:02.020871"
   },
   {
     "k_number": "K200093",
@@ -895,7 +892,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:23:02.097950"
+    "timestamp": "2026-02-14T18:02:06.228358"
   },
   {
     "k_number": "K200094",
@@ -906,20 +903,19 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:45:29.631006"
+    "timestamp": "2026-02-14T18:02:11.890854"
   },
   {
     "k_number": "K200095",
     "success": true,
     "predicates": [
-      "K140454"
-    ],
-    "similar_devices": [
+      "K140454",
       "K173338"
     ],
+    "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:45:34.292416"
+    "timestamp": "2026-02-14T18:02:18.611558"
   },
   {
     "k_number": "K200096",
@@ -954,22 +950,21 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:23:36.599206"
+    "timestamp": "2026-02-14T18:02:39.958702"
   },
   {
     "k_number": "K200099",
     "success": true,
     "predicates": [
-      "K153639"
-    ],
-    "similar_devices": [
+      "K153639",
       "K161689",
       "K171027",
       "K171694"
     ],
+    "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:23:46.385564"
+    "timestamp": "2026-02-14T18:02:50.072251"
   },
   {
     "k_number": "K200100",
@@ -980,7 +975,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T16:43:32.990476"
+    "timestamp": "2026-02-14T18:02:57.069273"
   },
   {
     "k_number": "K200101",
@@ -1050,7 +1045,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:01:06.431759"
+    "timestamp": "2026-02-14T18:03:56.565774"
   },
   {
     "k_number": "K200108",
@@ -1073,7 +1068,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:46:55.792403"
+    "timestamp": "2026-02-14T18:04:10.562341"
   },
   {
     "k_number": "K200110",
@@ -1100,7 +1095,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:47:36.244780"
+    "timestamp": "2026-02-14T18:04:59.145961"
   },
   {
     "k_number": "K200114",
@@ -1111,7 +1106,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:47:42.332765"
+    "timestamp": "2026-02-14T18:05:07.741452"
   },
   {
     "k_number": "K200115",
@@ -1119,15 +1114,15 @@
     "predicates": [
       "K173077"
     ],
-    "similar_devices": [
+    "similar_devices": [],
+    "parent_devices": [
       "K172064",
       "K172320",
       "K142041",
       "K153097"
     ],
-    "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:47:47.155874"
+    "timestamp": "2026-02-14T18:05:14.061015"
   },
   {
     "k_number": "K200116",
@@ -1139,7 +1134,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:27:18.477855"
+    "timestamp": "2026-02-14T18:05:24.342189"
   },
   {
     "k_number": "K200117",
@@ -1150,7 +1145,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:48:01.036464"
+    "timestamp": "2026-02-14T18:05:34.774546"
   },
   {
     "k_number": "K200118",
@@ -1161,7 +1156,7 @@
     "similar_devices": [],
     "parent_devices": [],
     "child_devices": [],
-    "timestamp": "2026-02-14T17:48:07.334210"
+    "timestamp": "2026-02-14T18:05:42.602892"
   },
   {
     "k_number": "K200119",
